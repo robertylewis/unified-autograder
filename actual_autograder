@@ -54,11 +54,8 @@ mv tex_submission submission
 mv source lean_ag_src
 mv unified_ag_src source
 
-cd source
-
-ls
-./scripts/grade_tex
+./source/scripts/grade_tex
 
 mv results/results.json tex_results.json
 
-python3 combine_json.py
+python3 source/scripts/combine_json.py
