@@ -10,7 +10,7 @@ def main():
         json_lean = json.loads(s_lean)
         json_tex = json.loads(s_tex)
 
-    results = {"tests": json_tex.tests}
+    results = {"tests": json_tex["tests"]}
     
     # The lean result contains a "tests" field iff it was able to complete testing - otherwise
     # it just has a score of 0 and a description of the error that prevented testing.
