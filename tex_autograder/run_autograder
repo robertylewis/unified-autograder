@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-cd /autograder/source
-git reset --hard HEAD
-git pull
-
-# Runs shell script for autograder, since we pull each time. 
-bash /autograder/source/scripts/run_autograder.sh

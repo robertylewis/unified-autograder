@@ -39,7 +39,6 @@ def compile_file(filename):
     """
     command = "pdflatex -shell-escape -interaction=nonstopmode -halt-on-error " + SUBMISSION + filename + " > " + OUTPUT
     os.system(command)
-    os.system(command)
 
 def grade(filename):
     """
@@ -75,7 +74,6 @@ def grade(filename):
     write_result("Your file compiled successfully!", "You'll see any warnings or bad boxes produced below, along with a generated score. \nPlease still verify that your submitted PDF is correct and correctly tagged.", 1, 1, output_tests)
 
 def main():
-    os.chdir(SUBMISSION)
     file_to_compile = get_filename()
     compile_file(file_to_compile)
     grade(file_to_compile)

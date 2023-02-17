@@ -1,64 +1,10 @@
 #!/usr/bin/env bash
 
-echo "Executing run_autograder..."
+# This is just a wrapper script so we don't have to keep re-uploading the zipped autograder.
+# The script that actually does the grading is called actual_autograder
 
 set -ex
-cd /autograder
-
-# We're expecting students to submit two files, a .tex file and a .lean file, but the two autograders
-# expect the submission dir to contain either one or the other. So we split them out to start.
-mkdir lean_submission
-mv submission/*.lean lean_submission/
-
-mkdir tex_submission
-mv submission/*.tex tex_submission/
-
-rm -rf submission
-
-mv source main_source
-
-#########################################
-##  LEAN AUTOGRADER EXECUTION
-#########################################
-
-mv lean_submission submission
-mv lean_autograder_source source
-cd source
-
+cd /autograder/unified_ag_source
 git pull
+./actual_autograder
 
-# The following line is needed for this reason:
-# we have just pulled a new version of the course project,
-# which has the autograder as a dependency.
-# If we update the version of the autograder in that project,
-# `run_autograder_main` may change.
-# So we need to make sure that the latest versions of the dependencies are present
-# before we copy that file over.
-
-~/.elan/bin/lake update
-
-./lake-packages/autograder/run_autograder_main
-
-cd ..
-
-# results.json should now contain lean results, now need to append tex results
-
-#########################################
-##  TEX AUTOGRADER EXECUTION
-#########################################
-
-mv submission lean_submission
-mv tex_submission submission
-
-mv source lean_autograder_source
-mv tex_autograder_source source
-
-mv results/results.json lean_results.json
-
-./source/run_autograder
-
-mv results/results.json tex_results.json
-
-python3 combine_json.py
-
-mv main_source source
