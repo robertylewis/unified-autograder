@@ -47,7 +47,9 @@ def grade(filename):
     with open(OUTPUT, "r", encoding="utf-8") as output_file:
         output = output_file.read()
     log = SUBMISSION + filename.replace(".tex", ".log")
-    with open(log, "r", encoding="latin1") as log_file:
+    print(log)
+    print(os.system("ls"))
+    with open(filename.replace(".tex", ".log"), "r", encoding="latin1") as log_file:
         log_file_text = log_file.read()
     log_test = {"name": "LaTeX Output Log", "output": log_file_text.split("! ", 1)[-1], "visibility": "hidden"}
     if "Fatal error occurred, no output PDF file produced!" in output:
