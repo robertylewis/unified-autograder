@@ -23,12 +23,12 @@ cp source/config.json ./
 curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y --default-toolchain leanprover/lean4:nightly-2023-01-16
 
 LEAN_AUTOGRADER_REPO=$(jq -r '.autograder_repo' < config.json)
-git clone "https://github.com/$LEAN_AUTOGRADER_REPO" "lean_ag_source"
-cp config.json lean_autograder_source/
-cd lean_autograder_source
+git clone "https://github.com/$LEAN_AUTOGRADER_REPO" "lean_ag_src"
+cp config.json lean_ag_src
+cd lean_ag_src
 
 ~/.elan/bin/lake exe cache get 
 ~/.elan/bin/lake build autograder AutograderTests 
 
 cd /autograder
-git clone "https://github.com/westluke/unified-autograder" "unified_ag_source"
+git clone "https://github.com/westluke/unified-autograder" "unified_ag_src"

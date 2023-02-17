@@ -4,7 +4,7 @@
 # The script that actually does the grading is called actual_autograder
 
 set -ex
-cd /autograder/unified_ag_source
+cd /autograder/unified_ag_src
 git pull
 ./actual_autograder
 

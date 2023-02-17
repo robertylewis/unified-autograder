@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -ex
+
 cd /autograder
 
 # We're expecting students to submit two files, a .tex file and a .lean file, but the two autograders
@@ -19,7 +21,7 @@ mv source main_source
 #########################################
 
 mv lean_submission submission
-mv lean_autograder_source source
+mv lean_ag_src source
 cd source
 
 git pull
@@ -49,11 +51,10 @@ mv results/results.json lean_results.json
 mv submission lean_submission
 mv tex_submission submission
 
-mv source lean_autograder_source
-mv main_source source
+mv source lean_ag_src
+mv unified_ag_src source
 
 cd source
-git pull
 
 ls
 ./scripts/grade_tex
