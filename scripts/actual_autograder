@@ -54,7 +54,8 @@ mv tex_submission submission
 mv source lean_ag_src
 mv unified_ag_src source
 
-./source/scripts/grade_tex
+# The OR is so that a compilation failure doesn't ruin the whole autograding script.
+./source/scripts/grade_tex || true
 
 mv results/results.json tex_results.json
 

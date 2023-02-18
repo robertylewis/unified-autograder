@@ -13,6 +13,9 @@ apt install -y texlive-full python3 python3-pip python3-dev
 
 cp source/config.json ./
 
+THIS_REPO=$(jq -r '.this_repo' < config.json)
+git clone "https://github.com/$THIS_REPO" "unified_ag_src"
+
 #########################################
 ##  LEAN AUTOGRADER SETUP
 #########################################
@@ -29,6 +32,3 @@ cd lean_ag_src
 
 ~/.elan/bin/lake exe cache get 
 ~/.elan/bin/lake build autograder AutograderTests 
-
-cd /autograder
-git clone "https://github.com/westluke/unified-autograder" "unified_ag_src"

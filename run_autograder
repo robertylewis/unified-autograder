@@ -6,5 +6,5 @@
 set -ex
 cd /autograder/unified_ag_src
 git pull
-./actual_autograder
+./scripts/actual_autograder
 

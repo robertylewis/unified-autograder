@@ -22,15 +22,17 @@ def get_filename():
     """
     _, _, files = next(os.walk(SUBMISSION, (None, None, [])))
     tex_files = []
+
     for file in files:
         if file.endswith(".tex"):
             tex_files.append(file)
         if file.endswith("main.tex"): # If we see `main.tex`, assume that is main file
             return file
+
     if len(tex_files) != 1:
         write_result("Error compiling", "Since there was no main.tex, we tried to infer the .tex file to compile, of which there were none or more than 1. \nThere should be exactly one .tex file in the submission (not within any folders). \nPlease try re-uploading your submission again. ", 0, 2)
         sys.exit(1)
-    filename = tex_files[0]
+
     return tex_files[0]
 
 def compile_file(filename):
@@ -47,22 +49,27 @@ def grade(filename):
     with open(OUTPUT, "r", encoding="utf-8") as output_file:
         output = output_file.read()
     log = SUBMISSION + filename.replace(".tex", ".log")
-    # print(log)
-    # print(os.system("ls"))
+
     with open(filename.replace(".tex", ".log"), "r", encoding="latin1") as log_file:
         log_file_text = log_file.read()
+
     log_test = {"name": "LaTeX Output Log", "output": log_file_text.split("! ", 1)[-1], "visibility": "hidden"}
+
     if "Fatal error occurred, no output PDF file produced!" in output:
         log_test["visibility"] = "visible"
         log_test["score"] = 0
         log_test["max_score"] = 1
         write_result("Error compiling", "There was a fatal error while compiling the submission and no PDF file was produced. \nPlease check your .tex file and try again. The log file is shown below. ", 0, 1, [log_test])
         sys.exit(1)
+
     os.system("/autograder/source/scripts/texloganalyser --last -w " + log + " > " + LOG_ANALYSIS_OUTPUT)
+
     with open(LOG_ANALYSIS_OUTPUT, "r") as log_analysis_file:
         log_analysis_output = log_analysis_file.read()
+
     warning_test = {"name": "Warnings", "output": log_analysis_output, "visibility": "visible"}
     output_tests = [warning_test, log_test]
+
     if "0 warnings" in log_analysis_output:
         warning_test["name"] = "No warnings!"
         with open(f"{SOURCE}templates/fun/tea.txt", "r", encoding="utf-8") as fun_tea_file:
@@ -73,6 +80,7 @@ def grade(filename):
         warning_test["max_score"] = 0
         warning_test["score"] = -0.1
         warning_test["name"] = "Warnings"
+
     write_result("Your file compiled successfully!", "You'll see any warnings or bad boxes produced below, along with a generated score. \nPlease still verify that your submitted PDF is correct and correctly tagged.", 1, 1, output_tests)
 
 def main():
