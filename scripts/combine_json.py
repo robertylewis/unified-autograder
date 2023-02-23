@@ -1,26 +1,30 @@
 import json
-import sys
+import os
+
+def read_tex_results():
+    with open("/autograder/tex_results.json", 'r') as f_tex:
+        s_tex = f_tex.read()
+        json_tex = json.loads(s_tex)
+        return {"tests": json_tex["tests"]}
+
+def read_lean_results():
+    with open("/autograder/lean_results.json", 'r') as f_lean:
+        s_lean = f_lean.read()
+        json_lean = json.loads(s_lean)  
+        # The lean result contains a "tests" field iff it was able to complete testing - otherwise
+        # it just has a score of 0 and a description of the error that prevented testing.
+        return { "tests": (json_lean["tests"] if "tests" in json_lean else json_lean) }
+
 
 def main():
-    with open("/autograder/lean_results.json", 'r') as f_lean, open("/autograder/tex_results.json", 'r') as f_tex:
-        s_lean = f_lean.read()
-        s_tex = f_tex.read()
-        print(s_lean)
-        print(s_tex)
-        json_lean = json.loads(s_lean)
-        json_tex = json.loads(s_tex)
+    has_lean, has_tex = os.path.isfile("/autograder/lean_results.json"), os.path.isfile("/autograder/tex_results.json")
 
-    results = {"tests": json_tex["tests"]}
-    
-    # The lean result contains a "tests" field iff it was able to complete testing - otherwise
-    # it just has a score of 0 and a description of the error that prevented testing.
-    if "tests" in json_lean:
-        results["tests"] += json_lean["tests"]
-    else:
-        results["tests"] += json_lean
+    lean_results = read_lean_results() if has_lean else {"tests": {"name": "No Lean file found", "score": 0, "output": "You are expected to upload exactly one .lean file!"}}
+    tex_results = read_tex_results() if has_tex else {"tests": {"name": "No Lean file found", "score": 0, "output": "You are expected to upload exactly one .tex file!"}}
+
 
     with open("results/results.json", "w") as f_out:
-        f_out.write(json.dumps(results))
+        f_out.write(json.dumps({"tests": lean_results["tests"] + tex_results["tests"]}))
 
 if __name__ == "__main__":
     main()
