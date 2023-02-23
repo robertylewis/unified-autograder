@@ -81,7 +81,7 @@ def grade(filename):
         warning_test["score"] = -0.1
         warning_test["name"] = "Warnings"
 
-    write_result("Your file compiled successfully!", "You'll see any warnings or bad boxes produced below, along with a generated score. \nPlease still verify that your submitted PDF is correct and correctly tagged.", 1, 1, output_tests)
+    write_result("Your .tex file compiled successfully!", "You'll see any warnings or bad boxes produced below, along with a generated score. \nPlease still verify that your submitted PDF is correct and correctly tagged.", 1, 1, output_tests)
 
 def main():
     file_to_compile = get_filename()
