@@ -65,7 +65,13 @@ if [ $LEANFILES == 1 ]; then
 
     mv submission lean_submission
 
+
+    mv source lean_ag_src
+
 fi
+
+
+mv unified_ag_src source
 
 #########################################
 ##  TEX AUTOGRADER EXECUTION
@@ -76,9 +82,6 @@ fi
 if [ $TEXFILES == 1 ]; then 
 
     mv tex_submission submission
-
-    mv source lean_ag_src
-    mv unified_ag_src source
 
     # The OR is so that a compilation failure doesn't ruin the whole autograding script.
     ./source/scripts/grade_tex || true
