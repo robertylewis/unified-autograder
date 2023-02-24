@@ -18,7 +18,7 @@ if [ $LEANFILES == 1 ]; then
 
 fi
   
-if [ $TEXFILES == 1 ]; then 
+if [ $TEXFILES >= 1 ]; then 
 
   mkdir tex_submission
   mv submission/*.tex tex_submission/
@@ -80,7 +80,7 @@ mv unified_ag_src source
 
 
 
-if [ $TEXFILES == 1 ]; then 
+if [ $TEXFILES >= 1 ]; then 
 
     curl $TEX_TEMPLATE --output template.zip 
 
@@ -91,8 +91,12 @@ if [ $TEXFILES == 1 ]; then
 
     mv tex_submission submission
 
+    cd submission
+
     # The OR is so that a compilation failure doesn't ruin the whole autograding script.
     ./source/scripts/grade_tex || true
+
+    cd ..
 
     mv results/results.json tex_results.json
 

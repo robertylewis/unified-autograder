@@ -20,7 +20,7 @@ def main():
     has_lean, has_tex = os.path.isfile("/autograder/lean_results.json"), os.path.isfile("/autograder/tex_results.json")
 
     lean_results = read_lean_results() if has_lean else {"tests": [{"name": "No .lean file found", "score": 0, "output": "You are expected to upload exactly one .lean file!", "status": "failed"}]}
-    tex_results = read_tex_results() if has_tex else {"tests": [{"name": "No .tex file found", "score": 0, "output": "You are expected to upload exactly one .tex file!", "status": "failed"}]}
+    tex_results = read_tex_results() if has_tex else {"tests": [{"name": "No .tex file found", "score": 0, "output": "You are expected to upload at least one .tex file!", "status": "failed"}]}
 
 
     with open("results/results.json", "w") as f_out:
