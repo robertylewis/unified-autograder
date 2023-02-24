@@ -18,7 +18,7 @@ if [ $LEANFILES == 1 ]; then
 
 fi
   
-if [ $TEXFILES >= 1 ]; then 
+if [ $TEXFILES -ge 1 ]; then 
 
   mkdir tex_submission
   mv submission/*.tex tex_submission/
@@ -80,7 +80,7 @@ mv unified_ag_src source
 
 
 
-if [ $TEXFILES >= 1 ]; then 
+if [ $TEXFILES -ge 1 ]; then 
 
     curl $TEX_TEMPLATE --output template.zip 
 
