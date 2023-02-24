@@ -21,14 +21,14 @@ fi
 if [ $TEXFILES -ge 1 ]; then 
 
   mkdir tex_submission
-  mv submission/*.tex tex_submission/
+  mv submission/* tex_submission/
 
 fi
 
 
-  rm -rf submission
+rm -rf submission
 
-  mv source unified_ag_src
+mv source unified_ag_src
 
 
 #########################################
