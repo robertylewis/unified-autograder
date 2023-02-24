@@ -94,7 +94,7 @@ if [ $TEXFILES -ge 1 ]; then
     cd submission
 
     # The OR is so that a compilation failure doesn't ruin the whole autograding script.
-    ./source/scripts/grade_tex || true
+    ../source/scripts/grade_tex || true
 
     cd ..
 
