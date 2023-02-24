@@ -39,7 +39,7 @@ def compile_file(filename):
     """
     Compiles the file and returns the output.
     """
-    command = "pdflatex -shell-escape -interaction=nonstopmode -halt-on-error " + SUBMISSION + filename + " > " + OUTPUT
+    command = "pdflatex -shell-escape -interaction=nonstopmode -halt-on-error \"" + SUBMISSION + filename + "\" > " + OUTPUT
     os.system(command)
 
 def grade(filename):
