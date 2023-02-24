@@ -14,14 +14,14 @@ TEX_TEMPLATE=$1
 if [ $LEANFILES == 1 ]; then 
 
   mkdir lean_submission
-  mv submission/*.lean lean_submission/
+  cp submission/*.lean lean_submission/
 
 fi
   
 if [ $TEXFILES -ge 1 ]; then 
 
   mkdir tex_submission
-  mv submission/* tex_submission/
+  cp submission/* tex_submission/
 
 fi
 
