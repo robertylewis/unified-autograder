@@ -3,8 +3,10 @@
 # This is just a wrapper script so we don't have to keep re-uploading the zipped autograder.
 # The script that actually does the grading is called actual_autograder
 
+TEX_TEMPLATE=$(jq -r '.tex_template' < config.json)
+
 set -ex
 cd /autograder/unified_ag_src
 git pull
-./scripts/actual_autograder
+./scripts/actual_autograder $TEX_TEMPLATE
 
