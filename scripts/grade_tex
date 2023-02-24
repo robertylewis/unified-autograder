@@ -3,5 +3,5 @@ export LC_ALL=C
 # chmod +x /autograder/source/scripts/texloganalyser
 
 # Runs autograder
-cp /autograder/source/templates/compile/* /autograder/submission
+# cp /autograder/source/templates/compile/* /autograder/submission
 python3 /autograder/source/scripts/compile_and_grade.py
