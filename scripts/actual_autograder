@@ -86,8 +86,8 @@ if [ $TEXFILES == 1 ]; then
 
     unzip template.zip -d tex_template
 
-    mv tex_template/*.cls tex_submission || true 
-    mv tex_template/*.sty tex_submission || true 
+    mv tex_template/*/*.cls tex_submission || true 
+    mv tex_template/*/*.sty tex_submission || true 
 
     mv tex_submission submission
 
