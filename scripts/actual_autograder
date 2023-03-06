@@ -89,6 +89,9 @@ if [ $TEXFILES -ge 1 ]; then
     mv tex_template/*/*.cls tex_submission || true 
     mv tex_template/*/*.sty tex_submission || true 
 
+    mv tex_template/*.cls tex_submission || true 
+    mv tex_template/*.sty tex_submission || true 
+
     mv tex_submission submission
 
     cd submission
