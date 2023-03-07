@@ -24,7 +24,7 @@ def main():
 
 
     with open("results/results.json", "w") as f_out:
-        f_out.write(json.dumps({"tests": tex_results["tests"] + [{"name": "PDF upload reminder", "score": 0, "max_score": 0, "output": "Thanks! Remember to also upload your PDF to the HW5 assignment on Gradescope. (This submission is for your .tex file only.)"}]}))
+        f_out.write(json.dumps({"tests": [{"name": "PDF upload reminder", "score": 0, "max_score": 0, "output": "Thanks! Remember to also upload your PDF to the HW5 assignment on Gradescope. (This submission is for your .tex file only.)"}] + tex_results["tests"]}))
 
 if __name__ == "__main__":
     main()
